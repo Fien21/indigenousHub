@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bla'an Language Learning Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Enhanced Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 25px;
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .stat:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .stat-icon {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        /* Styled stat backgrounds with gradients */
+        .stat-hearts {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+        }
+
+        .stat-xp {
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+        }
+
+        .stat-level {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        }
+
+        .stat-streak {
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+        }
+
+        /* Rest of your existing styles... */
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .category {
+            color: #3b82f6;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .word {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .blaan-text {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .pronunciation {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 1.2em;
+        }
+
+        .question {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.3em;
+            color: #374151;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .option {
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            background: none;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: all 0.3s;
+        }
+
+        .option:hover {
+            border-color: #3b82f6;
+            background-color: #f8fafc;
+        }
+
+        .option.correct {
+            background-color: #dcfce7;
+            border-color: #22c55e;
+        }
+
+        .option.wrong {
+            background-color: #fee2e2;
+            border-color: #ef4444;
+        }
+
+        .game-over {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .restart-btn {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .stat-update {
+            animation: pulse 0.4s ease-in-out;
+        }
+
+/* Back button*/
+/* Common button styles */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #218838;
+}
+
+/* Position the back button in the top-left corner */
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;  /* Align to the left */
+    background-color: #007bff; /* Blue for the back button */
+}
+
+.back-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Optional container styles */
+.signup-container {
+    text-align: center;
+    margin-top: 50px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+   <!-- Back button positioned at the top-left -->
+    <a href="index.html" class="btn back-btn">Back to Homepage</a>
+
+        <div class="stats-bar">
+            <div class="stat stat-hearts">
+                <div class="stat-icon">❤️</div>
+                <div class="stat-value" id="hearts">3</div>
+                <div class="stat-label">Lives</div>
+            </div>
+            <div class="stat stat-xp">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-value" id="xp">0</div>
+                <div class="stat-label">Experience</div>
+            </div>
+            <div class="stat stat-level">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-value" id="level">1</div>
+                <div class="stat-label">Level</div>
+            </div>
+            <div class="stat stat-streak">
+                <div class="stat-icon">🔥</div>
+                <div class="stat-value" id="streak">0</div>
+                <div class="stat-label">Streak</div>
+            </div>
+        </div>
+
+        <div id="game-container" class="card">
+            <!-- Game content will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        const lessons = [
+            {
+                category: "Greetings",
+                blaan: "Fye",
+                pronunciation: "Fi-yeh",
+                question: "What does 'Fye' mean?",
+                options: ["Good morning", "Good evening", "Thank you", "Hello"],
+                correct: 3,
+                hint: "A common Bla'an greeting",
+                exp: 10
+            },
+            {
+                category: "Common Phrases",
+                blaan: "Bong",
+                pronunciation: "Bong",
+                question: "How do you say 'Thank you' in Bla'an?",
+                options: ["Fye", "Bong", "Mlat", "Fye kel"],
+                correct: 1,
+                hint: "Used to express gratitude",
+                exp: 15
+            },
+            {
+                category: "Adjectives",
+                blaan: "Mlat",
+                pronunciation: "M-lat",
+                question: "Select the meaning of 'Mlat'",
+                options: ["Beautiful", "Good", "Bad", "Happy"],
+                correct: 0,
+                hint: "Used to describe something pleasing to look at",
+                exp: 20
+            }
+        ];
+
+        let gameState = {
+            currentLesson: 0,
+            hearts: 3,
+            xp: 0,
+            level: 1,
+            streak: 0
+        };
+
+        function updateStats() {
+            const stats = document.querySelectorAll('.stat');
+            stats.forEach(stat => stat.classList.remove('stat-update'));
+
+            document.getElementById('hearts').textContent = gameState.hearts;
+            document.getElementById('xp').textContent = gameState.xp;
+            document.getElementById('level').textContent = gameState.level;
+            document.getElementById('streak').textContent = gameState.streak;
+
+            stats.forEach(stat => {
+                stat.classList.add('stat-update');
+            });
+        }
+
+        function loadLesson() {
+            const lesson = lessons[gameState.currentLesson];
+            const container = document.getElementById('game-container');
+            
+            container.innerHTML = `
+                <div class="category">${lesson.category}</div>
+                <div class="word">
+                    <div class="blaan-text">${lesson.blaan}</div>
+                    <div class="pronunciation">${lesson.pronunciation}</div>
+                </div>
+                <div class="question">${lesson.question}</div>
+                <div class="options">
+                    ${lesson.options.map((option, index) => `
+                        <button class="option" onclick="checkAnswer(${index})">${option}</button>
+                    `).join('')}
+                </div>
+                <button class="hint-btn" onclick="toggleHint()">Show Hint</button>
+                <div class="hint" id="hint" style="display: none;">💡 ${lesson.hint}</div>
+            `;
+        }
+
+        function checkAnswer(selectedIndex) {
+            const lesson = lessons[gameState.currentLesson];
+            const options = document.querySelectorAll('.option');
+            
+            options.forEach(option => option.disabled = true);
+            
+            if (selectedIndex === lesson.correct) {
+                options[selectedIndex].classList.add('correct');
+                gameState.xp += lesson.exp;
+                gameState.streak++;
+                if (gameState.xp >= 100) {
+                    gameState.level++;
+                    gameState.xp = 0;
+                }
+                
+                setTimeout(() => {
+                    gameState.currentLesson = (gameState.currentLesson + 1) % lessons.length;
+                    loadLesson();
+                    updateStats();
+                }, 1000);
+            } else {
+                options[selectedIndex].classList.add('wrong');
+                options[lesson.correct].classList.add('correct');
+                gameState.hearts--;
+                gameState.streak = 0;
+                
+                if (gameState.hearts <= 0) {
+                    showGameOver();
+                } else {
+                    setTimeout(() => {
+                        loadLesson();
+                        updateStats();
+                    }, 1000);
+                }
+            }
+        }
+
+        function toggleHint() {
+            const hint = document.getElementById('hint');
+            hint.style.display = hint.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function showGameOver() {
+            const container = document.getElementById('game-container');
+            container.innerHTML = `
+                <div class="game-over">
+                    <h2>Game Over!</h2>
+                    <p>Final Level: ${gameState.level}</p>
+                    <p>XP Gained: ${gameState.xp}</p>
+                    <button class="restart-btn" onclick="restartGame()">Try Again</button>
+                </div>
+            `;
+        }
+
+        function restartGame() {
+            // Reset game state
+            gameState = {
+                currentLesson: 0,
+                hearts: 3,
+                xp: 0,
+                level: 1,
+                streak: 0
+            };
+            
+            // Update UI
+            updateStats();
+            loadLesson();
+        }
+
+        // Initialize the game
+        loadLesson();
+        
+    </script>
+</body>
+</html>

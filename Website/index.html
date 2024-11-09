@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Example</title>
+    <style>
+        .header {
+            background-color: #2f7f67;
+            color: #f1f1f1;
+            position: fixed;
+            width: 100%;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: calc(100% - 40px);
+        }
+
+        .header a {
+            color: #f1f1f1;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 20px;
+        }
+        .header .login-search-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .login-btn {
+            margin: 0 20px;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            color: #2f7f67;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .header .login-btn:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header .search-bar {
+            width: 200px;
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            margin-right: 10px; /* Adjusted to switch position */
+            font-size: 16px;
+        }
+
+        .header .search-bar-btn {
+            background-color: #2f7f67;
+            color: #f1f1f1;
+            border: none;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .header .search-bar-btn:hover {
+            background-color: #dbdbdb;
+            color: #2f7f67;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        img{
+            width: 200px;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+       
+        
+
+        .footer {
+            background-color: #2f7f67;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            
+        }
+
+        .footer a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #f1f1f1;
+        }
+
+        .footer-icons {
+            margin-right: 10px;
+            text-align: right;
+        }
+
+        .footer-icons a {
+            font-size: 16px;
+            margin: 0 10px;
+           
+        }
+
+        p {
+            color: rgb(239, 240, 240);
+            font-size: 16px;
+            margin: 0;
+           
+        }
+
+        
+        .Subscribe {
+          
+           color: #ffffff;
+          
+           height: 80px;
+           width: 140px;
+           border-radius: 5px;
+           cursor: pointer;
+           margin-left: 20px;
+           font-size: 24px;
+           transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+        }
+        .Subscribe:hover {
+          
+            background-color: rgb(200, 40, 40); /* Darker red background on hover */
+            transform: translateY(-5px); /* Move slightly upward */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow */
+        }
+
+        .tweeter {
+            color: #ffffff;
+            height: 80px;
+            width: 140px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 24px;
+            
+            margin-left: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+        }
+        .tweeter:hover {
+            background-color: rgb(24, 150, 200); /* Darker blue background on hover */
+            transform: translateY(-5px); /* Move slightly upward */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow */
+        }
+
+        .Facebook {
+            color: #ffffff;
+            height: 80px;
+            width: 140px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 24px;
+            margin-left: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+        }
+        .Facebook:hover {
+            background-color: rgb(45, 70, 120); /* Darker blue background on hover */
+            transform: translateY(-5px); /* Move slightly upward */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow */
+        }
+
+        /* Sidebar styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Initially hidden */
+    width: 250px;
+    height: 100%;
+    background-color: #5c5c5c;
+    padding-top: 20px;
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+.sidebar.active {
+    left: 0; /* Slide in when active */
+}
+
+.sidebar .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+<header class="header">
+    <img src="img/GLH-logo.png" alt="">
+
+    <div>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#">Features</a>
+    </div>
+  
+    <div class="login-search-container">
+        <div class="search-bar-container">
+            <input type="text" class="search-bar" placeholder="Search">
+            <button class="search-bar-btn">Search</button>
+        </div>
+        <a href="#" class="login-btn">Login</a>
+    </div>
+       
+
+
+</header>
+<header class="bg-primary text-white p-3">
+    <div class="container d-flex justify-content-between align-items-center">
+        <!-- Sidebar toggle icon -->
+        <svg class="sidebar-icon" onclick="toggleSidebar()" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+            <path d="M5 6H12H19M5 12H19M5 18H19" stroke="#ffffff" stroke-width="2" stroke-linecap="round"></path>
+        </svg>
+        
+        <h1 class="h3 mb-0 ml-2">Food Dash - Dashboard</h1>
+        
+        <!-- Log out button -->
+        <button onclick="logout()" class="btn btn-danger">Log Out</button>
+    </div>
+</header>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <span class="close-btn" onclick="toggleSidebar()">&times;</span>
+    <div class="profile-container">
+        <i class="fas fa-user-circle fa-3x prof_circle"></i>
+        <p class="admin-text ml-4">Admin</p>
+    </div>
+    <ul>
+        <!-- Sidebar navigation links -->
+        <li><a href="dashboard.php">Dashboard</a></li>
+        <li><a href="POS.php">POS</a></li>
+        <li><a href="products.php">Product & Stock</a></li>
+    </ul>
+</div>
+   
+    <footer class="footer">
+
+        <p class="reserved">&copy; 2024 Your Company. All rights reserved.</p>
+    </footer>
+</body>
+</html>

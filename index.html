@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JACO- Learning Platform</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/min/tiny-slider.js"></script>
+    <style>
+        :root {
+            --primary: #2C5530;
+            --secondary: #8B4513;
+            --accent: #E86F52;
+            --background: #FAF6F1;
+            --text: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            
+            max-width: 2000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        nav a {
+            font-size: 20px;
+            color: var(--text);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+        }
+
+        .btn {
+    margin-left: 10px;
+    background-color: var(--accent);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    font-size: clamp(0.9rem, 2vw, 1.1rem); /* Responsive font size */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Optional shadow for a subtle elevation */
+    width: fit-content; /* Ensures button width matches content */
+    margin: 10px auto; /* Centers the button horizontally */
+    position: relative; /* Enables positioning context */
+    white-space: nowrap; /* Prevents text wrapping */
+    min-width: 150px; /* Minimum width for consistency */
+    max-width: 90%; /* Maximum width for smaller screens */
+
+   
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+ /*sign up button*/
+    .Sgn-btn{
+         padding: 0.5rem 1rem;
+         border: none;
+         width: fit-content;
+        background-color: var(--accent);
+         border-radius: 4px;
+         color: white;
+         border: none;
+         cursor: pointer;
+         font-size: clamp(0.9rem, 2vw, 1.1rem);
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+        
+    }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .btn {
+        padding: 12px 20px;
+        min-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn {
+        padding: 10px 15px;
+        min-width: 100px;
+    }
+}
+
+
+        /* Hero Section */
+       .hero {
+    background-image: url("img/iw-2024-philippines.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+ 
+    display:  flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    margin-top: 60px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-family: Georgia, serif;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Languages Section */
+        .languages {
+            background-color: white;
+            padding: 4rem 2rem;
+        }
+
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+
+        .language-card {
+            background: var(--background);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .language-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .language-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .language-description {
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: white;
+            padding: 4rem 2rem;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .testimonial {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text);
+            color: white;
+            padding: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+        }
+        /* Flyout Menu Styles */
+        .flyout-menu {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            z-index: 1000;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .flyout-menu.active {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .language-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 40px;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .language-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid #edf2f7;
+            opacity: 0;
+            transform: translateY(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .language-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ffd700, #ff9500);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .language-box:hover::before {
+            transform: scaleX(1);
+        }
+
+        .flyout-menu.active .language-box {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered animation for language boxes */
+        .flyout-menu.active .language-box:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+        .flyout-menu.active .language-box:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+        .flyout-menu.active .language-box:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+
+        .language-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .language-box img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .language-box h3 {
+            color: #2d3748;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .language-box p {
+            color: #718096;
+            margin-bottom: 25px;
+            font-size: 1.1em;
+        }
+
+        .language-box .btn {
+            background: transparent;
+            color: #1a365d;
+            border: 2px solid #1a365d;
+            padding: 12px 25px;
+            font-size: 1em;
+        }
+
+        .language-box .btn:hover {
+            background: #1a365d;
+            color: white;
+        }
+
+        /* Overlay styles */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 768px) {
+            .language-container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="logo">Indigenous Learn</div>
+            <nav class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#languages">Languages</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#contact">Contact</a>
+                <a href="SignUp.html" class="Sgn-btn">Sign Up</a>
+
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Revitalize Your Heritage Through Language</h1>
+            <p>An immersive and engaging way to learn Indigenous languages through games and stories.</p>
+            <button id="start-learning-btn" class="btn">Start Learning</button>
+        </div>
+    </section>
+
+     <div id="flyout-menu" class="flyout-menu">
+        <div class="language-container">
+            <div class="language-box">
+                <img src="img\Bla'anTibe.png" alt="Bla'an Culture">
+                <h3>Bla'an</h3>
+                <p>Explore the rich heritage and unique expressions of the Bla'an language, spoken in South Cotabato and Sarangani.</p>
+                <a href="bla'an.html" class="btn" style="text-decoration: none; display: inline-block; padding: 12px 20px; ">Learn Bla'an</a>
+            </div>
+            <div class="language-box">
+                <img src="img\TboliTribe.png" alt="T'boli Culture">
+                <h3>T'boli</h3>
+                <p>Discover the beautiful T'boli language, with its poetic expressions and deep cultural connections. ewewewewe</p>
+                <a href="tboli.html" class="btn" style="text-decoration: none; display: inline-block; padding: 12px 20px; ">Learn T'boli</a>
+            </div>
+            <div class="language-box">
+                <img src="img\MaguindanaonTribe.png" alt="Maguindanaon Culture">
+                <h3>Maguindanaon</h3>
+                <p>Immerse yourself in the Maguindanaon language, rich with history and cultural significance. ewewewewe</p>
+                <a href="maguindanaon.html" class="btn" style="text-decoration: none; display: inline-block; padding: 12px 20px; ">Learn Maguindanaon</a>
+            </div>
+        </div>
+    </div>
+    <div id="overlay" class="overlay"></div>
+
+    <section id="features" class="features">
+        <h2>Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Interactive Games</h3>
+                <p>Learn through engaging games and activities designed to make language acquisition fun and effective.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Cultural Stories</h3>
+                <p>Immerse yourself in traditional stories and folktales that preserve and share cultural heritage.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Native Speaker Audio</h3>
+                <p>Learn proper pronunciation from native speakers through high-quality audio recordings.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="languages" class="languages">
+    <h2>Available Languages</h2>
+    <div class="language-grid">
+        <div class="language-card">
+            <div class="language-icon">B</div>
+            <h3>Bla'an</h3>
+            <p class="language-description">Discover the rich language of the Bla'an people from South Cotabato and Sarangani. Learn the unique expressions and cultural wisdom passed down through generations.</p>
+            <a href="Bla'an.html" class="btn" style="text-decoration: none; display: inline-block; padding: 12px 20px; ">Start Learning</a>
+
+        </div>
+        <div class="language-card">
+            <div class="language-icon">T</div>
+            <h3>T'boli</h3>
+            <p class="language-description">Explore the vibrant language of the T'boli people, known for their rich traditions, dreamweaving, and musical heritage from South Cotabato.</p>
+            <a href="T'boli.html" class="btn" style="text-decoration: none; display: inline-block; padding: 12px 20px; " >Start Learning</a>
+        </div>
+        <div class="language-card">
+            <div class="language-icon">M</div>
+            <h3>Maguindanao</h3>
+            <p class="language-description">Learn the language of the Maguindanaon people, with its deep connections to the history and culture of Central Mindanao.</p>
+            <a href="Maguindanao.html" class="btn" style="text-decoration: none; display: inline-block; padding: 12px 20px; ">Start Learning</a>
+        </div>
+    </div>
+</section>
+
+
+    <section id="how-it-works" class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <h3>Step 1</h3>
+                <p>Choose your language and create your profile</p>
+            </div>
+            <div class="step">
+                <h3>Step 2</h3>
+                <p>Start with basic lessons and progress through interactive games</p>
+            </div>
+            <div class="step">
+                <h3>Step 3</h3>
+                <p>Track your progress and earn achievement badges</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2>What Our Learners Say</h2>
+        <div class="testimonial-slider">
+            <div class="testimonial">
+                <p>"This platform has helped me reconnect with my cultural heritage in ways I never thought possible."</p>
+                <cite>- Sarah Mansul</cite>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Join the Movement to Preserve Indigenous Languages!</h2>
+        <p>Start your journey today and help keep our cultural heritage alive.</p>
+        <button class="btn">Sign Up Today</button>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h3>Quick Links</h3>
+                <p>About Us</p>
+                <p>Privacy Policy</p>
+                <p>Terms of Service</p>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <p>Email: contact@indigenouslearn.com</p>
+                <p>Phone: (555) 123-4567</p>
+            </div>
+            <div>
+                <h3>Follow Us</h3>
+                <p>Facebook</p>
+                <p>Twitter</p>
+                <p>Instagram</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        //Flyout for start learning
+         const startLearningBtn = document.getElementById('start-learning-btn');
+        const flyoutMenu = document.getElementById('flyout-menu');
+        const overlay = document.getElementById('overlay');
+
+        startLearningBtn.addEventListener('click', () => {
+            flyoutMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            flyoutMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Close flyout when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!flyoutMenu.contains(event.target) && 
+                !startLearningBtn.contains(event.target)) {
+                flyoutMenu.classList.remove('active');
+                overlay.classList.remove('active');
+            }
+        });
+
+        // Prevent closing when clicking inside flyout
+        flyoutMenu.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+       @import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css');
+@import url('https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css');
+
+/* Reset default margins and paddings */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f6f5f7;
+    position: relative;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('img/iw-2024-philippines.jpg') no-repeat center center;
+    background-size: cover;
+    z-index: -1;
+}
+
+.container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    position: relative;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+}
+
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.sign-in-container {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.container.right-panel-active .sign-in-container {
+    transform: translateX(100%);
+}
+
+.sign-up-container {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.container.right-panel-active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: show 0.6s;
+}
+
+@keyframes show {
+    0%, 49.99% {
+        opacity: 0;
+        z-index: 1;
+    }
+    50%, 100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+}
+
+.container.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+}
+
+.overlay {
+    background: #ff416c;
+    background: -webkit-linear-gradient(to right, #ff4b2b, #e84820);
+    background: linear-gradient(to right, #ff4b2b, #e84820);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 0;
+    color: #ffffff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.container.right-panel-active .overlay {
+    transform: translateX(50%);
+}
+
+.overlay-panel {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.overlay-left {
+    transform: translateX(-20%);
+}
+
+.container.right-panel-active .overlay-left {
+    transform: translateX(0);
+}
+
+.overlay-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-right {
+    transform: translateX(20%);
+}
+
+input {
+    background: #f6f5f7;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+button {
+    border-radius: 20px;
+    border: 1px solid #ff4b2b;
+    background-color: #ff4b2b;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+}
+
+button.ghost {
+    background-color: transparent;
+    border-color: #ffffff;
+}
+
+button:hover {
+    background-color: #e77558;
+}
+
+form {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+}
+
+p {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    margin: 20px 0 30px;
+}
+
+/* Style the gallery section */
+.title {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #333;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    width: 100%; /* Ensure full width */
+    text-align: center;
+}
+
+.main-content p {
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.main-content ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.gallery {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    top: 50px; /* Adjust the top distance to position it below .title */
+}
+
+.gallery h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.image-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.image-container img:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .image-container {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
+/* Footer section */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    position: fixed; /* Fix the footer position */
+    bottom: 0; /* Position at the bottom of the viewport */
+    width: 100%; /* Ensure the footer spans the entire width */
+}
+
+footer .content-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+footer p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.social-links {
+    margin-top: 10px;
+}
+
+.social-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #ffc107;
+}
+
+/* Back button*/
+/* Common button styles */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #218838;
+}
+
+/* Position the back button in the top-left corner */
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;  /* Align to the left */
+    background-color: #007bff; /* Blue for the back button */
+}
+
+.back-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Optional container styles */
+.signup-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+
+    </style>
+</head>
+<body>
+
+   <!-- Back button positioned at the top-left -->
+    <a href="index.html" class="btn back-btn">Back to Homepage</a>
+
+   <div class="background"></div>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="#">
+                <h1>Create Account</h1>
+                    <input type="text" placeholder="Name" />
+                    <input type="email" placeholder="Email" />
+                    <input type="password" placeholder="Password" />
+                    <input type="date" placeholder="Birthday" />
+                    <input type="tel" placeholder="Phone Number" />
+                   
+                    <button>Sign Up</button>
+
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="#">
+                <h1>Sign in</h1>
+                <input type="email" placeholder="Email" />
+                <input type="password" placeholder="Password" />
+                <button>Sign In</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button class="ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Enter your personal details and start journey with us</p>
+                    <button class="ghost" id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //Double Slider Login
+document.addEventListener('DOMContentLoaded', () => {
+    const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const container = document.getElementById('container');
+
+    signUpButton.addEventListener('click', () => {
+        container.classList.add('right-panel-active');
+    });
+
+    signInButton.addEventListener('click', () => {
+        container.classList.remove('right-panel-active');
+    });
+});
+//Double Slider Login
+
+
+        const signupForm = document.getElementById('signupForm');
+        const usernameInput = document.getElementById('username');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const usernameError = document.getElementById('usernameError');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+        const passwordStrength = document.getElementById('passwordStrength');
+        const successMessage = document.getElementById('successMessage');
+
+        // Function to check password strength
+        function checkPasswordStrength(password) {
+            let strength = '';
+            if (password.length < 6) {
+                strength = '<span class="strength-weak">Weak</span>';
+            } else if (password.length >= 6 && password.length < 10) {
+                strength = '<span class="strength-medium">Medium</span>';
+            } else {
+                strength = '<span class="strength-strong">Strong</span>';
+            }
+            passwordStrength.innerHTML = strength;
+        }
+
+        // Real-time validation for password strength
+        passwordInput.addEventListener('input', () => {
+            checkPasswordStrength(passwordInput.value);
+        });
+
+        // Form submission for Sign Up
+        signupForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            let isValid = true;
+
+            // Username validation
+            if (usernameInput.value.trim() === '') {
+                usernameError.style.display = 'block';
+                isValid = false;
+            } else {
+                usernameError.style.display = 'none';
+            }
+
+            // Email validation
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(emailInput.value)) {
+                emailError.style.display = 'block';
+                isValid = false;
+            } else {
+                emailError.style.display = 'none';
+            }
+
+            // Password match validation
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                passwordError.style.display = 'block';
+                isValid = false;
+            } else {
+                passwordError.style.display = 'none';
+            }
+
+            // If form is valid, display success message
+            if (isValid) {
+                successMessage.style.display = 'block';
+                signupForm.reset(); // Reset form fields
+            }
+        });
+
+        // Modal logic
+        const loginModal = document.getElementById('loginModal');
+        const loginBtn = document.getElementById('loginBtn');
+        const closeModal = document.getElementById('closeModal');
+
+        // Show login modal
+        loginBtn.addEventListener('click', function() {
+            loginModal.style.display = 'flex';
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', function() {
+            loginModal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside of the modal
+        window.onclick = function(event) {
+            if (event.target == loginModal) {
+                loginModal.style.display = 'none';
+            }
+        };
+
+        // Form submission for Login (add your own login handling logic here)
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+            // Here you would typically handle login, e.g., send credentials to server
+            alert('Login functionality not yet implemented.');
+            loginModal.style.display = 'none'; // Close the modal after submission
+        });
+    </script>
+</body>
+</html>
