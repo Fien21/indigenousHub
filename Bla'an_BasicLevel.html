@@ -221,7 +221,43 @@
 .signup-container {
     text-align: center;
     margin-top: 50px;
+
 }
+
+ .profile {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+
+        .profile img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+    #logout-button {
+        font-size: 20px;
+        padding: 10px 20px;
+        margin-left: 10px;
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #logout-button:hover {
+        background-color: #ff1a1a;
+    }
+    #name{ 
+        font-size: 20px;
+        margin-right: 10px;
+
+    }
     </style>
 </head>
 <body>
@@ -229,6 +265,12 @@
         
    <!-- Back button positioned at the top-left -->
     <a href="index.html" class="btn back-btn">Back to Homepage</a>
+
+     <div class="profile">
+        <img src="img/profile-circle-svgrepo-com.svg" alt="Profile Icon"> <!-- Make sure to replace 'profile-icon.png' with your icon path -->
+        <span id="name">Delacruz</span>
+         <a  href="SignUp.html" style="text-decoration: none; display: inline-block; padding: 12px 20px; " id="logout-button" onclick="logout()">Logout</a>
+    </div>
 
         <div class="stats-bar">
             <div class="stat stat-hearts">
@@ -260,37 +302,108 @@
 
     <script>
         const lessons = [
-            {
-                category: "Greetings",
-                blaan: "Fye",
-                pronunciation: "Fi-yeh",
-                question: "What does 'Fye' mean?",
-                options: ["Good morning", "Good evening", "Thank you", "Hello"],
-                correct: 3,
-                hint: "A common Bla'an greeting",
-                exp: 10
-            },
-            {
-                category: "Common Phrases",
-                blaan: "Bong",
-                pronunciation: "Bong",
-                question: "How do you say 'Thank you' in Bla'an?",
-                options: ["Fye", "Bong", "Mlat", "Fye kel"],
-                correct: 1,
-                hint: "Used to express gratitude",
-                exp: 15
-            },
-            {
-                category: "Adjectives",
-                blaan: "Mlat",
-                pronunciation: "M-lat",
-                question: "Select the meaning of 'Mlat'",
-                options: ["Beautiful", "Good", "Bad", "Happy"],
-                correct: 0,
-                hint: "Used to describe something pleasing to look at",
-                exp: 20
-            }
-        ];
+    {
+        category: "Greetings",
+        blaan: "Fye",
+        pronunciation: "Fi-yeh",
+        question: "What does 'Fye' mean?",
+        options: ["Good morning", "Good evening", "Thank you", "Hello"],
+        correct: 3,
+        hint: "A common Bla'an greeting",
+        exp: 10
+    },
+    {
+        category: "Common Phrases",
+        blaan: "Bong",
+        pronunciation: "Bong",
+        question: "How do you say 'Thank you' in Bla'an?",
+        options: ["Fye", "Bong", "Mlat", "Fye kel"],
+        correct: 1,
+        hint: "Used to express gratitude",
+        exp: 15
+    },
+    {
+        category: "Adjectives",
+        blaan: "Mlat",
+        pronunciation: "M-lat",
+        question: "Select the meaning of 'Mlat'",
+        options: ["Beautiful", "Good", "Bad", "Happy"],
+        correct: 0,
+        hint: "Used to describe something pleasing to look at",
+        exp: 20
+    },
+    {
+        category: "Greetings",
+        blaan: "Fyi",
+        pronunciation: "F-yee",
+        question: "What does 'Fyi' mean?",
+        options: ["Goodbye", "Thank you", "Good morning", "Good night"],
+        correct: 2,
+        hint: "Another morning greeting",
+        exp: 12
+    },
+    {
+        category: "Common Phrases",
+        blaan: "Moy",
+        pronunciation: "Moy",
+        question: "How do you say 'How are you?' in Bla'an?",
+        options: ["Moy", "Bong", "Fye", "Hulon"],
+        correct: 0,
+        hint: "Used to ask someone's well-being",
+        exp: 18
+    },
+    {
+        category: "Colors",
+        blaan: "Milat",
+        pronunciation: "Mee-lat",
+        question: "What does 'Milat' mean?",
+        options: ["Red", "Green", "Blue", "Yellow"],
+        correct: 1,
+        hint: "A color commonly associated with nature",
+        exp: 15
+    },
+    {
+        category: "Numbers",
+        blaan: "Sana",
+        pronunciation: "Sa-na",
+        question: "What does 'Sana' mean?",
+        options: ["One", "Two", "Three", "Four"],
+        correct: 0,
+        hint: "A basic number",
+        exp: 10
+    },
+    {
+        category: "Food",
+        blaan: "Naga",
+        pronunciation: "Na-ga",
+        question: "What does 'Naga' mean?",
+        options: ["Food", "Water", "Rice", "Soup"],
+        correct: 2,
+        hint: "A staple food in Bla'an culture",
+        exp: 20
+    },
+    {
+        category: "Emotions",
+        blaan: "Kusu",
+        pronunciation: "Ku-su",
+        question: "What does 'Kusu' mean?",
+        options: ["Sad", "Happy", "Angry", "Fearful"],
+        correct: 1,
+        hint: "A positive emotion",
+        exp: 15
+    },
+    {
+        category: "Places",
+        blaan: "Paga",
+        pronunciation: "Pa-ga",
+        question: "What does 'Paga' mean?",
+        options: ["Home", "Mountain", "River", "Village"],
+        correct: 3,
+        hint: "Where people live",
+        exp: 18
+    }
+];
+
 
         let gameState = {
             currentLesson: 0,
@@ -312,6 +425,11 @@
             stats.forEach(stat => {
                 stat.classList.add('stat-update');
             });
+        }
+
+        function getRandomLesson() {
+            // Randomly select a lesson index
+            gameState.currentLesson = Math.floor(Math.random() * lessons.length);
         }
 
         function loadLesson() {
