@@ -160,19 +160,17 @@
             margin-top: 2rem;
         }
 
-        .feature-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+        .feature-card img {
+    width: 100%;
+    max-width: 150px; /* Adjust this value as needed */
+    height: auto;
+    margin: 0 auto 1rem; /* Centers the image and provides spacing below */
+    display: block;
+    object-fit: contain; /* Ensures images maintain their aspect ratio */
+}
 
-        /* Languages Section */
-        .languages {
-            background-color: white;
-            padding: 4rem 2rem;
-        }
+
+        
 
         .language-grid {
             display: grid;
@@ -435,7 +433,6 @@
             <div class="logo">Indigenous Learn</div>
             <nav class="nav-links">
                 <a href="#features">Features</a>
-                <a href="#languages">Languages</a>
                 <a href="#how-it-works">How It Works</a>
                 <a href="#contact">Contact</a>
                 <a href="SignUp.html" class="Sgn-btn">Sign Up</a>
@@ -460,64 +457,32 @@
                 <p>Explore the rich heritage and unique expressions of the Bla'an language, spoken in South Cotabato and Sarangani.</p>
                 <a href="bla'an.html" class="btn" style="text-decoration: none; display: inline-block; padding: 12px 20px; ">Learn Bla'an</a>
             </div>
-            <div class="language-box">
-                <img src="img\TboliTribe.png" alt="T'boli Culture">
-                <h3>T'boli</h3>
-                <p>Discover the beautiful T'boli language, with its poetic expressions and deep cultural connections. ewewewewe</p>
-                <a href="tboli.html" class="btn" style="text-decoration: none; display: inline-block; padding: 12px 20px; ">Learn T'boli</a>
-            </div>
-            <div class="language-box">
-                <img src="img\MaguindanaonTribe.png" alt="Maguindanaon Culture">
-                <h3>Maguindanaon</h3>
-                <p>Immerse yourself in the Maguindanaon language, rich with history and cultural significance. ewewewewe</p>
-                <a href="maguindanaon.html" class="btn" style="text-decoration: none; display: inline-block; padding: 12px 20px; ">Learn Maguindanaon</a>
-            </div>
         </div>
     </div>
     <div id="overlay" class="overlay"></div>
 
     <section id="features" class="features">
-        <h2>Features</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <h3>Interactive Games</h3>
-                <p>Learn through engaging games and activities designed to make language acquisition fun and effective.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Cultural Stories</h3>
-                <p>Immerse yourself in traditional stories and folktales that preserve and share cultural heritage.</p>
-            </div>
-            <div class="feature-card">
-                <h3>Native Speaker Audio</h3>
-                <p>Learn proper pronunciation from native speakers through high-quality audio recordings.</p>
-            </div>
+    <h2>Features</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <img src="img/games-2-svgrepo-com.svg" alt="Interactive Games">
+            <h3>Interactive Games</h3>
+            <p>Learn through engaging games and activities designed to make language acquisition fun and effective.</p>
         </div>
-    </section>
-
-    <section id="languages" class="languages">
-    <h2>Available Languages</h2>
-    <div class="language-grid">
-        <div class="language-card">
-            <div class="language-icon">B</div>
-            <h3>Bla'an</h3>
-            <p class="language-description">Discover the rich language of the Bla'an people from South Cotabato and Sarangani. Learn the unique expressions and cultural wisdom passed down through generations.</p>
-            <a href="Bla'an.html" class="btn" style="text-decoration: none; display: inline-block; padding: 12px 20px; ">Start Learning</a>
-
+        <div class="feature-card">
+            <img src="img/indian-2-svgrepo-com.svg" alt="Cultural Stories">
+            <h3>Cultural Stories</h3>
+            <p>Immerse yourself in traditional stories and folktales that preserve and share cultural heritage.</p>
         </div>
-        <div class="language-card">
-            <div class="language-icon">T</div>
-            <h3>T'boli</h3>
-            <p class="language-description">Explore the vibrant language of the T'boli people, known for their rich traditions, dreamweaving, and musical heritage from South Cotabato.</p>
-            <a href="T'boli.html" class="btn" style="text-decoration: none; display: inline-block; padding: 12px 20px; " >Start Learning</a>
-        </div>
-        <div class="language-card">
-            <div class="language-icon">M</div>
-            <h3>Maguindanao</h3>
-            <p class="language-description">Learn the language of the Maguindanaon people, with its deep connections to the history and culture of Central Mindanao.</p>
-            <a href="Maguindanao.html" class="btn" style="text-decoration: none; display: inline-block; padding: 12px 20px; ">Start Learning</a>
+        <div class="feature-card">
+            <img src="img/eagle-feathers-svgrepo-com.svg    " alt="Native Speaker Audio">
+            <h3>Native Speaker Audio</h3>
+            <p>Learn proper pronunciation from native speakers through high-quality audio recordings.</p>
         </div>
     </div>
 </section>
+
+   
 
 
     <section id="how-it-works" class="how-it-works">
